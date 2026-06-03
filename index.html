@@ -40,7 +40,21 @@
 
   <button onclick="addJob()">Add Job</button>
 
-  <div id="jobs"></div>
+  <div id="jobs"></div>function saveJobs() {
+  localStorage.setItem('jobs', JSON.stringify(jobs));
+}
+
+function loadJobs() {
+  const saved = localStorage.getItem('jobs');
+  if (saved) {
+    jobs = JSON.parse(saved);
+    renderJobs();
+  }
+}jobs.push({
+  company,
+  position,
+  status
+});
 
   <script>
 let jobs = [];
