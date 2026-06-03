@@ -3,7 +3,29 @@
 <head>
   <title>JobMatch</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
+  <style>.status-applied {
+  background: #e3f2fd;
+  padding: 4px 8px;
+  border-radius: 5px;
+}
+
+.status-interview {
+  background: #fff3cd;
+  padding: 4px 8px;
+  border-radius: 5px;
+}
+
+.status-offer {
+  background: #d4edda;
+  padding: 4px 8px;
+  border-radius: 5px;
+}
+
+.status-rejected {
+  background: #f8d7da;
+  padding: 4px 8px;
+  border-radius: 5px;
+}
     body {
       font-family: Arial, sans-serif;
       max-width: 600px;
@@ -56,7 +78,20 @@ function loadJobs() {
   status
 });
 
-  <script>
+  <script>function getStatusClass(status) {
+  switch(status.toLowerCase()) {
+    case "applied":
+      return "status-applied";
+    case "interview":
+      return "status-interview";
+    case "offer":
+      return "status-offer";
+    case "rejected":
+      return "status-rejected";
+    default:
+      return "";
+  }
+}
 let jobs = [];
 
 function renderJobs() {
