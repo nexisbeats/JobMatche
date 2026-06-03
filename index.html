@@ -43,21 +43,88 @@
   <div id="jobs"></div>
 
   <script>
-    function addJob() {
-      const company = document.getElementById('company').value;
-      const position = document.getElementById('position').value;
-      const status = document.getElementById('status').value;
+let jobs = [];
 
-      const jobs = document.getElementById('jobs');
+function renderJobs() {
+  const container = document.getElementById('jobs');
+  container.innerHTML = '';
 
-      jobs.innerHTML += `
-        <div class="job">
-          <h3>${company}</h3>
-          <p>${position}</p>
-          <p>Status: ${status}</p>
-        </div>
-      `;
-    }
-  </script>
+  jobs.forEach((job, index) => {
+    container.innerHTML += `
+      <div class="job">
+        <h3>${job.company}</h3>
+        <p>${job.position}</p>
+        <p>Status: ${job.status}</p>
+
+        <button onclick="editJob(${index})">
+          Edit
+        </button>
+
+        <button onclick="deleteJob(${index})">
+          Delete
+        </button>
+      </div>
+    `;
+  });
+}
+
+function addJob() {
+  const company = document.getElementById('company').value;
+  const position = document.getElementById('position').value;
+  const status = document.getElementById('status').value;
+
+  if (!company || !position) {
+    alert('Please enter company and position');
+    return;
+  }
+
+  jobs.push({
+    company,
+    position,
+    status
+  });
+
+  renderJobs();
+
+  document.getElementById('company').value = '';
+  document.getElementById('position').value = '';
+}
+
+function deleteJob(index) {
+  jobs.splice(index, 1);
+  renderJobs();
+}
+
+function editJob(index) {
+  const company = prompt(
+    'Company Name',
+    jobs[index].company
+  );
+
+  if (company === null) return;
+
+  const position = prompt(
+    'Position',
+    jobs[index].position
+  );
+
+  if (position === null) return;
+
+  const status = prompt(
+    'Status (Applied, Interview, Offer, Rejected)',
+    jobs[index].status
+  );
+
+  if (status === null) return;
+
+  jobs[index] = {
+    company,
+    position,
+    status
+  };
+
+  renderJobs();
+}
+</script>
 </body>
 </html>
