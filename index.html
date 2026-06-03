@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JobMatch</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+    }
+
+    .job {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>JobMatch</h1>
+
+  <input id="company" placeholder="Company">
+  <input id="position" placeholder="Position">
+
+  <select id="status">
+    <option>Applied</option>
+    <option>Interview</option>
+    <option>Offer</option>
+    <option>Rejected</option>
+  </select>
+
+  <button onclick="addJob()">Add Job</button>
+
+  <div id="jobs"></div>
+
+  <script>
+    function addJob() {
+      const company = document.getElementById('company').value;
+      const position = document.getElementById('position').value;
+      const status = document.getElementById('status').value;
+
+      const jobs = document.getElementById('jobs');
+
+      jobs.innerHTML += `
+        <div class="job">
+          <h3>${company}</h3>
+          <p>${position}</p>
+          <p>Status: ${status}</p>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
